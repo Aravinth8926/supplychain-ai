@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SupplyChainAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-network-wired"></i>
+                    <span>SupplyChain<strong>AI</strong></span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                
+                <!-- Admin Only Section -->
+                <div class="nav-divider" data-admin-only>ADMIN ONLY</div>
+                
+                <a href="admin-panel.html" class="nav-item" data-admin-only>
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Admin Panel</span>
+                </a>
+                <a href="user-management.html" class="nav-item" data-admin-only>
+                    <i class="fas fa-users-cog"></i>
+                    <span>User Management</span>
+                </a>
+                
+                <div class="nav-divider" data-admin-only>STANDARD FEATURES</div>
+                
+                <a href="demand-forecasting.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Demand Forecasting</span>
+                </a>
+                <a href="inventory-management.html" class="nav-item">
+                    <i class="fas fa-boxes"></i>
+                    <span>Inventory Management</span>
+                </a>
+                <a href="supplier-scoring.html" class="nav-item">
+                    <i class="fas fa-star"></i>
+                    <span>Supplier Scoring</span>
+                </a>
+                <a href="disruption-alerts.html" class="nav-item">
+                    <i class="fas fa-bell"></i>
+                    <span>Disruption Alerts</span>
+                </a>
+                <a href="transportation.html" class="nav-item">
+                    <i class="fas fa-truck"></i>
+                    <span>Transportation</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="reports.html" class="nav-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Reports</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item" onclick="event.preventDefault(); auth.logout();">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Welcome back, Rajesh!</h1>
+                    <p>Here's what's happening with your supply chain today</p>
+                </div>
+                <div class="header-right">
+                    <div class="header-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search...">
+                    </div>
+                    <a href="notifications.html" class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">8</span>
+                    </a>
+                    <div class="user-profile">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%231e88e5'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='white' font-size='40' font-family='Arial'%3ERK%3C/text%3E%3C/svg%3E" alt="User">
+                        <span>Rajesh K.</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Inventory</h3>
+                        <p class="stat-value">₹45.2 Cr</p>
+                        <span class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 12% from last month
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Forecast Accuracy</h3>
+                        <p class="stat-value">94.5%</p>
+                        <span class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 3.2% improvement
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Active Alerts</h3>
+                        <p class="stat-value">7</p>
+                        <span class="stat-change negative">
+                            <i class="fas fa-arrow-down"></i> 2 new today
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>On-Time Delivery</h3>
+                        <p class="stat-value">87.3%</p>
+                        <span class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 5% better
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts Section -->
+            <div class="dashboard-grid">
+                <div class="dashboard-card large">
+                    <div class="card-header">
+                        <h3>Demand Forecast - Next 30 Days</h3>
+                        <select class="filter-select">
+                            <option>All Products</option>
+                            <option>Electronics</option>
+                            <option>Automotive</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="demandChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Inventory Status</h3>
+                    </div>
+                    <div class="inventory-status">
+                        <div class="status-item">
+                            <span class="status-label">Optimal Stock</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill green" style="width: 65%"></div>
+                            </div>
+                            <span class="status-value">65%</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Low Stock</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill orange" style="width: 25%"></div>
+                            </div>
+                            <span class="status-value">25%</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Out of Stock</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill red" style="width: 10%"></div>
+                            </div>
+                            <span class="status-value">10%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Alerts -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Recent Alerts & Notifications</h3>
+                    <a href="disruption-alerts.html" class="view-all">View All</a>
+                </div>
+                <div class="alerts-list">
+                    <div class="alert-item warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div class="alert-content">
+                            <h4>Potential Delay - Mumbai Route</h4>
+                            <p>Heavy rainfall expected. Estimated 2-day delay for shipments.</p>
+                            <span class="alert-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="alert-item info">
+                        <i class="fas fa-info-circle"></i>
+                        <div class="alert-content">
+                            <h4>Inventory Replenishment Suggested</h4>
+                            <p>Product SKU-1234 reaching reorder point. Suggested order: 500 units.</p>
+                            <span class="alert-time">5 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="alert-item success">
+                        <i class="fas fa-check-circle"></i>
+                        <div class="alert-content">
+                            <h4>Supplier Performance Improved</h4>
+                            <p>Supplier "ABC Industries" rating increased to 4.5/5.</p>
+                            <span class="alert-time">1 day ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="auth.js"></script>
+    <script>
+        // Check authentication
+        requireAuth();
+        // Initialize user display
+        initializeUserDisplay();
+        
+        // Show admin features if user is admin
+        if (auth.isAdmin()) {
+            document.body.classList.add('admin-mode');
+            
+            // Add admin badge to sidebar
+            const sidebarHeader = document.querySelector('.sidebar-header');
+            if (sidebarHeader && !document.querySelector('.admin-badge-sidebar')) {
+                const adminBadge = document.createElement('div');
+                adminBadge.className = 'admin-badge-sidebar';
+                adminBadge.innerHTML = '<i class="fas fa-shield-alt"></i> ADMIN';
+                sidebarHeader.appendChild(adminBadge);
+            }
+        }
+    </script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

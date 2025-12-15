@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - SupplyChainAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-network-wired"></i>
+                    <span>SupplyChain<strong>AI</strong></span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="demand-forecasting.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Demand Forecasting</span>
+                </a>
+                <a href="inventory-management.html" class="nav-item">
+                    <i class="fas fa-boxes"></i>
+                    <span>Inventory Management</span>
+                </a>
+                <a href="supplier-scoring.html" class="nav-item">
+                    <i class="fas fa-star"></i>
+                    <span>Supplier Scoring</span>
+                </a>
+                <a href="disruption-alerts.html" class="nav-item">
+                    <i class="fas fa-bell"></i>
+                    <span>Disruption Alerts</span>
+                </a>
+                <a href="transportation.html" class="nav-item">
+                    <i class="fas fa-truck"></i>
+                    <span>Transportation</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="reports.html" class="nav-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Reports</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1><i class="fas fa-bell"></i> Notifications</h1>
+                    <p>Stay updated with all your supply chain activities</p>
+                </div>
+                <div class="notification-actions">
+                    <button class="btn btn-secondary" id="markAllRead">
+                        <i class="fas fa-check-double"></i> Mark All as Read
+                    </button>
+                    <button class="btn btn-secondary" id="clearAll">
+                        <i class="fas fa-trash"></i> Clear All
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Notification Filters -->
+            <div class="notification-filters">
+                <button class="filter-btn active" data-filter="all">
+                    All <span class="filter-count">23</span>
+                </button>
+                <button class="filter-btn" data-filter="unread">
+                    Unread <span class="filter-count">8</span>
+                </button>
+                <button class="filter-btn" data-filter="critical">
+                    Critical <span class="filter-count">3</span>
+                </button>
+                <button class="filter-btn" data-filter="alerts">
+                    Alerts <span class="filter-count">7</span>
+                </button>
+                <button class="filter-btn" data-filter="updates">
+                    Updates <span class="filter-count">13</span>
+                </button>
+            </div>
+            
+            <!-- Today's Notifications -->
+            <div class="notifications-section">
+                <h3 class="section-header">Today</h3>
+                
+                <div class="notification-card unread critical">
+                    <div class="notification-icon critical">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h4>Critical: Supplier Production Halt</h4>
+                            <span class="notification-time">30 minutes ago</span>
+                        </div>
+                        <p>ABC Industries has halted production due to power outage. Expected delay of 3-5 days for SKU-1001 and SKU-1002.</p>
+                        <div class="notification-actions-inline">
+                            <button class="btn-small btn-primary">View Details</button>
+                            <button class="btn-small">Contact Supplier</button>
+                        </div>
+                    </div>
+                    <button class="notification-close"><i class="fas fa-times"></i></button>
+                </div>
+                
+                <div class="notification-card unread warning">
+                    <div class="notification-icon warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h4>Low Stock Alert: Electronic Component A</h4>
+                            <span class="notification-time">2 hours ago</span>
+                        </div>
+                        <p>SKU-1001 stock level is below reorder point. Current: 45 units. Recommended order: 500 units.</p>
+                        <div class="notification-actions-inline">
+                            <button class="btn-small btn-primary">Create Purchase Order</button>
+                            <button class="btn-small">View Inventory</button>
+                        </div>
+                    </div>
+                    <button class="notification-close"><i class="fas fa-times"></i></button>
+                </div>
+                
+                <div class="notification-card unread info">
+                    <div class="notification-icon info">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h4>Shipment Delivered Successfully</h4>
+                            <span class="notification-time">3 hours ago</span>
+                        </div>
+                        <p>Shipment SHP-2024-045 has been delivered to Mumbai warehouse. 2,500 units of SKU-1003 received.</p>
+                        <div class="notification-actions-inline">
+                            <button class="btn-small">View Shipment</button>
+                        </div>
+                    </div>
+                    <button class="notification-close"><i class="fas fa-times"></i></button>
+                </div>
+                
+                <div class="notification-card read success">
+                    <div class="notification-icon success">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h4>Supplier Rating Updated</h4>
+                            <span class="notification-time">5 hours ago</span>
+                        </div>
+                        <p>XYZ Components rating increased from 4.0 to 4.5 based on recent performance improvements.</p>
+                    </div>
+                    <button class="notification-close"><i class="fas fa-times"></i></button>
+                </div>
+                
+                <div class="notification-card read info">
+                    <div class="notification-icon info">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h4>Weekly Report Generated</h4>
+                            <span class="notification-time">6 hours ago</span>
+                        </div>
+                        <p>Your weekly performance report for Dec 3-10 is ready for review.</p>
+                        <div class="notification-actions-inline">
+                            <button class="btn-small btn-primary">View Report</button>
+                            <button class="btn-small">Download PDF</button>
+                        </div>
+                    </div>
+                    <button class="notification-close"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            
+            <!-- Yesterday's Notifications -->
+            <div class="notifications-section">
+                <h3 class="section-header">Yesterday</h3>
+                
+                <div class="notification-card read warning">
+                    <div class="notification-icon warning">
+                        <i class="fas fa-cloud-rain"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h4>Weather Alert: Heavy Rainfall Expected</h4>
+                            <span class="notification-time">Yesterday, 2:30 PM</span>
+                        </div>
+                        <p>IMD predicts heavy rainfall on Mumbai-Pune route. 15 shipments may face delays.</p>
+                    </div>
+                    <button class="notification-close"><i class="fas fa-times"></i></button>
+                </div>
+                
+                <div class="notification-card read info">
+                    <div class="notification-icon info">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h4>AI Forecast Updated</h4>
+                            <span class="notification-time">Yesterday, 9:00 AM</span>
+                        </div>
+                        <p>Demand forecast for next 30 days has been updated with 94.5% confidence.</p>
+                        <div class="notification-actions-inline">
+                            <button class="btn-small">View Forecast</button>
+                        </div>
+                    </div>
+                    <button class="notification-close"><i class="fas fa-times"></i></button>
+                </div>
+                
+                <div class="notification-card read success">
+                    <div class="notification-icon success">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h4>Cost Savings Milestone Reached</h4>
+                            <span class="notification-time">Yesterday, 8:00 AM</span>
+                        </div>
+                        <p>Congratulations! You've saved ₹2.4 Crores this quarter through AI optimization.</p>
+                    </div>
+                    <button class="notification-close"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            
+            <!-- Earlier This Week -->
+            <div class="notifications-section">
+                <h3 class="section-header">Earlier This Week</h3>
+                
+                <div class="notification-card read info">
+                    <div class="notification-icon info">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h4>New User Added to Your Account</h4>
+                            <span class="notification-time">Dec 9, 3:45 PM</span>
+                        </div>
+                        <p>Priya Sharma has been added as a Supply Chain Manager with full access.</p>
+                    </div>
+                    <button class="notification-close"><i class="fas fa-times"></i></button>
+                </div>
+                
+                <div class="notification-card read info">
+                    <div class="notification-icon info">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h4>System Update Completed</h4>
+                            <span class="notification-time">Dec 8, 11:00 PM</span>
+                        </div>
+                        <p>SupplyChainAI has been updated with new features and performance improvements.</p>
+                    </div>
+                    <button class="notification-close"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            
+            <!-- Load More -->
+            <div class="load-more-section">
+                <button class="btn btn-secondary btn-large">
+                    <i class="fas fa-chevron-down"></i> Load More Notifications
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="auth.js"></script>
+    <script>requireAuth(); initializeUserDisplay();</script>
+    <script src="dashboard.js"></script>
+    <script src="notifications.js"></script>
+</body>
+</html>

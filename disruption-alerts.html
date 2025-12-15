@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disruption Alerts - SupplyChainAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo"><i class="fas fa-network-wired"></i><span>SupplyChain<strong>AI</strong></span></div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><i class="fas fa-home"></i><span>Dashboard</span></a>
+                <a href="demand-forecasting.html" class="nav-item"><i class="fas fa-chart-line"></i><span>Demand Forecasting</span></a>
+                <a href="inventory-management.html" class="nav-item"><i class="fas fa-boxes"></i><span>Inventory Management</span></a>
+                <a href="supplier-scoring.html" class="nav-item"><i class="fas fa-star"></i><span>Supplier Scoring</span></a>
+                <a href="disruption-alerts.html" class="nav-item active"><i class="fas fa-bell"></i><span>Disruption Alerts</span></a>
+                <a href="transportation.html" class="nav-item"><i class="fas fa-truck"></i><span>Transportation</span></a>
+                <a href="analytics.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Analytics</span></a>
+                <a href="reports.html" class="nav-item"><i class="fas fa-file-alt"></i><span>Reports</span></a>
+                <a href="settings.html" class="nav-item"><i class="fas fa-cog"></i><span>Settings</span></a>
+            </nav>
+            <div class="sidebar-footer"><a href="#" class="nav-item" onclick="event.preventDefault(); auth.logout();"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1><i class="fas fa-bell"></i> Real-Time Disruption Alerts</h1>
+                    <p>AI-powered early warning system for supply chain disruptions</p>
+                </div>
+                <button class="btn btn-primary"><i class="fas fa-cog"></i> Alert Settings</button>
+            </header>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon red"><i class="fas fa-exclamation-circle"></i></div>
+                    <div class="stat-info">
+                        <h3>Critical Alerts</h3>
+                        <p class="stat-value">3</p>
+                        <span class="stat-change negative">Immediate action needed</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div class="stat-info">
+                        <h3>Warning Alerts</h3>
+                        <p class="stat-value">12</p>
+                        <span class="stat-change">Monitor closely</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon blue"><i class="fas fa-info-circle"></i></div>
+                    <div class="stat-info">
+                        <h3>Info Alerts</h3>
+                        <p class="stat-value">8</p>
+                        <span class="stat-change">For awareness</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-info">
+                        <h3>Resolved Today</h3>
+                        <p class="stat-value">15</p>
+                        <span class="stat-change positive">Great progress!</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Active Alerts</h3>
+                    <div class="filter-group">
+                        <select class="form-control"><option>All Types</option><option>Weather</option><option>Supplier</option><option>Transportation</option></select>
+                        <select class="form-control"><option>All Priorities</option></select>
+                    </div>
+                </div>
+                <div class="alerts-detailed-list">
+                    <div class="alert-detailed critical">
+                        <div class="alert-header">
+                            <div class="alert-icon"><i class="fas fa-exclamation-circle"></i></div>
+                            <div class="alert-title-section">
+                                <h4>Supplier Production Halt - ABC Industries</h4>
+                                <span class="alert-meta">Critical • 30 minutes ago</span>
+                            </div>
+                            <span class="priority-badge critical">Critical</span>
+                        </div>
+                        <div class="alert-body">
+                            <p><strong>Issue:</strong> Power outage at supplier facility in Mumbai affecting production of SKU-1001, SKU-1002</p>
+                            <p><strong>Impact:</strong> Expected delay of 3-5 days for 2,500 units. May cause stockout by Dec 18.</p>
+                            <p><strong>AI Recommendation:</strong> Contact alternate supplier "XYZ Components" who has 1,800 units in stock. Estimated delivery: 2 days.</p>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="btn btn-primary">Contact Alternate Supplier</button>
+                            <button class="btn btn-secondary">View Impact Analysis</button>
+                            <button class="btn-text">Mark as Resolved</button>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-detailed warning">
+                        <div class="alert-header">
+                            <div class="alert-icon"><i class="fas fa-cloud-rain"></i></div>
+                            <div class="alert-title-section">
+                                <h4>Heavy Rainfall - Mumbai-Pune Route</h4>
+                                <span class="alert-meta">Warning • 2 hours ago</span>
+                            </div>
+                            <span class="priority-badge high">High</span>
+                        </div>
+                        <div class="alert-body">
+                            <p><strong>Issue:</strong> IMD predicts heavy rainfall (150mm+) on Mumbai-Pune expressway for next 48 hours</p>
+                            <p><strong>Impact:</strong> 15 active shipments may face 1-2 day delays. Total value: ₹45 lakhs</p>
+                            <p><strong>AI Recommendation:</strong> Reroute via NH48 (adds 2 hours but avoids weather risk)</p>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="btn btn-primary">Reroute Shipments</button>
+                            <button class="btn btn-secondary">View Affected Orders</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="auth.js"></script>
+    <script>requireAuth(); initializeUserDisplay();</script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

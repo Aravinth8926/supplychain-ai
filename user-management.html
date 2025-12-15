@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - SupplyChainAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-network-wired"></i>
+                    <span>SupplyChain<strong>AI</strong></span>
+                </div>
+                <div class="admin-badge-sidebar">
+                    <i class="fas fa-shield-alt"></i> ADMIN
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                
+                <div class="nav-divider">ADMIN ONLY</div>
+                
+                <a href="admin-panel.html" class="nav-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Admin Panel</span>
+                </a>
+                <a href="user-management.html" class="nav-item active">
+                    <i class="fas fa-users-cog"></i>
+                    <span>User Management</span>
+                </a>
+                
+                <div class="nav-divider">STANDARD FEATURES</div>
+                
+                <a href="demand-forecasting.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Demand Forecasting</span>
+                </a>
+                <a href="inventory-management.html" class="nav-item">
+                    <i class="fas fa-boxes"></i>
+                    <span>Inventory Management</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item" onclick="event.preventDefault(); auth.logout();">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1><i class="fas fa-users-cog"></i> User Management</h1>
+                    <p>Manage all users and their permissions</p>
+                </div>
+                <button class="btn btn-primary" onclick="showAddUserModal()">
+                    <i class="fas fa-user-plus"></i> Add New User
+                </button>
+            </header>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Users</h3>
+                        <p class="stat-value" id="totalUsers">0</p>
+                        <span class="stat-change">All registered users</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Active Users</h3>
+                        <p class="stat-value" id="activeUsers">0</p>
+                        <span class="stat-change positive">Logged in today</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Administrators</h3>
+                        <p class="stat-value" id="adminUsers">0</p>
+                        <span class="stat-change">Admin role</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-user-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Pending Approval</h3>
+                        <p class="stat-value">0</p>
+                        <span class="stat-change">Awaiting activation</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>All Users</h3>
+                    <div class="filter-group">
+                        <input type="text" class="form-control" placeholder="Search users..." id="searchUsers" style="width: 250px;">
+                        <select class="form-control" id="filterRole">
+                            <option value="all">All Roles</option>
+                            <option value="admin">Administrators</option>
+                            <option value="user">Regular Users</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Company</th>
+                                <th>Role</th>
+                                <th>Joined</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Users will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="auth.js"></script>
+    <script>
+        // Check admin access
+        requireAdmin();
+        initializeUserDisplay();
+        
+        // Load all users
+        function loadUsers() {
+            const users = auth.getAllUsers();
+            const tbody = document.getElementById('usersTableBody');
+            const totalUsersEl = document.getElementById('totalUsers');
+            const activeUsersEl = document.getElementById('activeUsers');
+            const adminUsersEl = document.getElementById('adminUsers');
+            
+            // Update stats
+            totalUsersEl.textContent = users.length;
+            activeUsersEl.textContent = users.filter(u => u.role === 'user').length;
+            adminUsersEl.textContent = users.filter(u => u.role === 'admin').length;
+            
+            // Clear table
+            tbody.innerHTML = '';
+            
+            // Add users to table
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                const joinDate = new Date(user.createdAt).toLocaleDateString('en-IN');
+                const roleClass = user.role === 'admin' ? 'badge-warning' : 'badge-success';
+                const roleText = user.role === 'admin' ? 'Administrator' : 'User';
+                
+                row.innerHTML = `
+                    <td><strong>${user.firstName} ${user.lastName}</strong></td>
+                    <td>${user.email}</td>
+                    <td>${user.companyName || 'N/A'}</td>
+                    <td><span class="${roleClass}">${roleText}</span></td>
+                    <td>${joinDate}</td>
+                    <td><span class="badge-success">Active</span></td>
+                    <td>
+                        <button class="btn-small" onclick="editUser('${user.id}')">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        ${user.id !== auth.currentUser.id ? `
+                        <button class="btn-small btn-danger" onclick="deleteUser('${user.id}')">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                        ` : ''}
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            if (users.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 2rem;">No users found</td></tr>';
+            }
+        }
+        
+        // Edit user
+        function editUser(userId) {
+            const users = auth.getAllUsers();
+            const user = users.find(u => u.id === userId);
+            if (user) {
+                alert(`Edit User: ${user.firstName} ${user.lastName}\n\nThis would open an edit modal in production.`);
+            }
+        }
+        
+        // Delete user
+        function deleteUser(userId) {
+            const users = auth.getAllUsers();
+            const user = users.find(u => u.id === userId);
+            if (user && confirm(`Are you sure you want to delete ${user.firstName} ${user.lastName}?`)) {
+                const updatedUsers = users.filter(u => u.id !== userId);
+                localStorage.setItem('users', JSON.stringify(updatedUsers));
+                loadUsers();
+                alert('User deleted successfully');
+            }
+        }
+        
+        // Add new user
+        function showAddUserModal() {
+            alert('Add New User\n\nThis would open a modal form in production to add a new user.');
+        }
+        
+        // Search users
+        document.getElementById('searchUsers').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#usersTableBody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+        
+        // Filter by role
+        document.getElementById('filterRole').addEventListener('change', function(e) {
+            const role = e.target.value;
+            const rows = document.querySelectorAll('#usersTableBody tr');
+            
+            rows.forEach(row => {
+                if (role === 'all') {
+                    row.style.display = '';
+                } else {
+                    const roleText = row.querySelector('.badge-success, .badge-warning').textContent.toLowerCase();
+                    row.style.display = roleText.includes(role) ? '' : 'none';
+                }
+            });
+        });
+        
+        // Load users on page load
+        loadUsers();
+    </script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

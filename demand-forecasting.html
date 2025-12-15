@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Demand Forecasting - SupplyChainAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <!-- Sidebar (same as dashboard) -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-network-wired"></i>
+                    <span>SupplyChain<strong>AI</strong></span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="demand-forecasting.html" class="nav-item active">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Demand Forecasting</span>
+                </a>
+                <a href="inventory-management.html" class="nav-item">
+                    <i class="fas fa-boxes"></i>
+                    <span>Inventory Management</span>
+                </a>
+                <a href="supplier-scoring.html" class="nav-item">
+                    <i class="fas fa-star"></i>
+                    <span>Supplier Scoring</span>
+                </a>
+                <a href="disruption-alerts.html" class="nav-item">
+                    <i class="fas fa-bell"></i>
+                    <span>Disruption Alerts</span>
+                </a>
+                <a href="transportation.html" class="nav-item">
+                    <i class="fas fa-truck"></i>
+                    <span>Transportation</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="reports.html" class="nav-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Reports</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1><i class="fas fa-chart-line"></i> AI Demand Forecasting</h1>
+                    <p>Predict future demand with machine learning trained on your historical data</p>
+                </div>
+                <button class="btn btn-primary">
+                    <i class="fas fa-sync-alt"></i> Refresh Forecast
+                </button>
+            </header>
+            
+            <!-- Forecast Controls -->
+            <div class="forecast-controls">
+                <div class="control-group">
+                    <label>Product Category</label>
+                    <select class="form-control">
+                        <option>All Categories</option>
+                        <option>Electronics</option>
+                        <option>Automotive Parts</option>
+                        <option>Raw Materials</option>
+                        <option>Finished Goods</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Time Period</label>
+                    <select class="form-control">
+                        <option>Next 7 Days</option>
+                        <option>Next 30 Days</option>
+                        <option>Next 90 Days</option>
+                        <option>Next 6 Months</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Region</label>
+                    <select class="form-control">
+                        <option>All India</option>
+                        <option>North India</option>
+                        <option>South India</option>
+                        <option>East India</option>
+                        <option>West India</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Model Type</label>
+                    <select class="form-control">
+                        <option>AI Auto-Select</option>
+                        <option>LSTM Neural Network</option>
+                        <option>ARIMA</option>
+                        <option>Prophet</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Forecast Accuracy -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Forecast Accuracy</h3>
+                        <p class="stat-value">94.5%</p>
+                        <span class="stat-change positive">Industry leading</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>AI Confidence</h3>
+                        <p class="stat-value">High</p>
+                        <span class="stat-change">Based on 2 years data</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Seasonal Factors</h3>
+                        <p class="stat-value">Detected</p>
+                        <span class="stat-change">Festival season ahead</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Forecast Chart -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Demand Forecast Visualization</h3>
+                    <div class="chart-legend">
+                        <span><i class="fas fa-circle" style="color: #1e88e5"></i> Actual Demand</span>
+                        <span><i class="fas fa-circle" style="color: #43a047"></i> Predicted Demand</span>
+                        <span><i class="fas fa-circle" style="color: #ff6f00"></i> Confidence Range</span>
+                    </div>
+                </div>
+                <div class="chart-container" style="height: 400px;">
+                    <canvas id="forecastChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Product-wise Forecast -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Top Products - Demand Forecast</h3>
+                    <button class="btn btn-secondary">Export Data</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Product SKU</th>
+                                <th>Product Name</th>
+                                <th>Current Stock</th>
+                                <th>Predicted Demand (30d)</th>
+                                <th>Confidence</th>
+                                <th>Action Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>SKU-1001</td>
+                                <td>Electronic Component A</td>
+                                <td>2,500 units</td>
+                                <td class="highlight-green">3,200 units</td>
+                                <td><span class="badge-success">95%</span></td>
+                                <td><button class="btn-small btn-primary">Order 700 units</button></td>
+                            </tr>
+                            <tr>
+                                <td>SKU-1002</td>
+                                <td>Automotive Part B</td>
+                                <td>1,800 units</td>
+                                <td class="highlight-orange">2,800 units</td>
+                                <td><span class="badge-success">92%</span></td>
+                                <td><button class="btn-small btn-warning">Order 1000 units</button></td>
+                            </tr>
+                            <tr>
+                                <td>SKU-1003</td>
+                                <td>Raw Material C</td>
+                                <td>5,000 kg</td>
+                                <td class="highlight-green">4,500 kg</td>
+                                <td><span class="badge-success">89%</span></td>
+                                <td><span class="text-success">Stock Sufficient</span></td>
+                            </tr>
+                            <tr>
+                                <td>SKU-1004</td>
+                                <td>Finished Product D</td>
+                                <td>800 units</td>
+                                <td class="highlight-red">1,900 units</td>
+                                <td><span class="badge-warning">87%</span></td>
+                                <td><button class="btn-small btn-danger">Urgent: Order 1100</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- AI Insights -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-lightbulb"></i> AI-Generated Insights</h3>
+                </div>
+                <div class="insights-list">
+                    <div class="insight-item">
+                        <i class="fas fa-arrow-trend-up"></i>
+                        <div>
+                            <h4>Seasonal Surge Expected</h4>
+                            <p>Based on historical patterns, demand for electronics is expected to increase by 35% during the upcoming Diwali season (Oct 20 - Nov 5). Consider increasing inventory by 40% to avoid stockouts.</p>
+                        </div>
+                    </div>
+                    <div class="insight-item">
+                        <i class="fas fa-cloud-rain"></i>
+                        <div>
+                            <h4>Monsoon Impact on Raw Materials</h4>
+                            <p>Weather data indicates heavy monsoon in supplier regions. Recommend ordering 2 weeks earlier than usual to compensate for potential transportation delays.</p>
+                        </div>
+                    </div>
+                    <div class="insight-item">
+                        <i class="fas fa-chart-line"></i>
+                        <div>
+                            <h4>Growing Trend Detected</h4>
+                            <p>Product SKU-1001 showing consistent 8% month-over-month growth. Consider negotiating bulk pricing with suppliers for better margins.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="auth.js"></script>
+    <script>requireAuth(); initializeUserDisplay();</script>
+    <script src="dashboard.js"></script>
+    <script>
+        // Create detailed forecast chart
+        const ctx = document.getElementById('forecastChart');
+        if (ctx) {
+            const labels = [];
+            const historical = [];
+            const forecast = [];
+            const upperBound = [];
+            const lowerBound = [];
+            
+            // Generate 60 days of data (30 historical + 30 forecast)
+            for (let i = -30; i < 30; i++) {
+                const date = new Date();
+                date.setDate(date.getDate() + i);
+                labels.push(date.toLocaleDateString('en-IN', { month: 'short', day: 'numeric' }));
+                
+                const base = 2000 + (i * 15);
+                const variation = Math.random() * 300 - 150;
+                
+                if (i < 0) {
+                    historical.push(Math.round(base + variation));
+                    forecast.push(null);
+                    upperBound.push(null);
+                    lowerBound.push(null);
+                } else {
+                    historical.push(null);
+                    const predicted = Math.round(base + variation + 100);
+                    forecast.push(predicted);
+                    upperBound.push(predicted + 200);
+                    lowerBound.push(predicted - 200);
+                }
+            }
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Historical Demand',
+                            data: historical,
+                            borderColor: '#1e88e5',
+                            backgroundColor: 'rgba(30, 136, 229, 0.2)',
+                            borderWidth: 3,
+                            fill: false,
+                            tension: 0.4,
+                            pointRadius: 2
+                        },
+                        {
+                            label: 'AI Forecast',
+                            data: forecast,
+                            borderColor: '#43a047',
+                            backgroundColor: 'rgba(67, 160, 71, 0.2)',
+                            borderWidth: 3,
+                            borderDash: [5, 5],
+                            fill: false,
+                            tension: 0.4,
+                            pointRadius: 2
+                        },
+                        {
+                            label: 'Upper Confidence',
+                            data: upperBound,
+                            borderColor: '#ff6f00',
+                            backgroundColor: 'rgba(255, 111, 0, 0.1)',
+                            borderWidth: 1,
+                            borderDash: [2, 2],
+                            fill: '+1',
+                            tension: 0.4,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'Lower Confidence',
+                            data: lowerBound,
+                            borderColor: '#ff6f00',
+                            backgroundColor: 'rgba(255, 111, 0, 0.1)',
+                            borderWidth: 1,
+                            borderDash: [2, 2],
+                            fill: false,
+                            tension: 0.4,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toLocaleString() + ' units';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

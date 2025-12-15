@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard - SupplyChainAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo"><i class="fas fa-network-wired"></i><span>SupplyChain<strong>AI</strong></span></div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><i class="fas fa-home"></i><span>Dashboard</span></a>
+                <a href="demand-forecasting.html" class="nav-item"><i class="fas fa-chart-line"></i><span>Demand Forecasting</span></a>
+                <a href="inventory-management.html" class="nav-item"><i class="fas fa-boxes"></i><span>Inventory Management</span></a>
+                <a href="supplier-scoring.html" class="nav-item"><i class="fas fa-star"></i><span>Supplier Scoring</span></a>
+                <a href="disruption-alerts.html" class="nav-item"><i class="fas fa-bell"></i><span>Disruption Alerts</span></a>
+                <a href="transportation.html" class="nav-item"><i class="fas fa-truck"></i><span>Transportation</span></a>
+                <a href="analytics.html" class="nav-item active"><i class="fas fa-chart-pie"></i><span>Analytics</span></a>
+                <a href="reports.html" class="nav-item"><i class="fas fa-file-alt"></i><span>Reports</span></a>
+                <a href="settings.html" class="nav-item"><i class="fas fa-cog"></i><span>Settings</span></a>
+            </nav>
+            <div class="sidebar-footer"><a href="#" class="nav-item" onclick="event.preventDefault(); auth.logout();"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1><i class="fas fa-chart-pie"></i> Advanced Analytics</h1>
+                    <p>Deep insights into your supply chain performance</p>
+                </div>
+                <div class="filter-group">
+                    <select class="form-control"><option>Last 30 Days</option><option>Last 90 Days</option><option>Last Year</option></select>
+                    <button class="btn btn-primary"><i class="fas fa-download"></i> Export Report</button>
+                </div>
+            </header>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue"><i class="fas fa-dollar-sign"></i></div>
+                    <div class="stat-info">
+                        <h3>Cost Savings (AI)</h3>
+                        <p class="stat-value">₹2.4 Cr</p>
+                        <span class="stat-change positive">This quarter</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="fas fa-chart-line"></i></div>
+                    <div class="stat-info">
+                        <h3>Efficiency Gain</h3>
+                        <p class="stat-value">32%</p>
+                        <span class="stat-change positive">Year over year</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple"><i class="fas fa-clock"></i></div>
+                    <div class="stat-info">
+                        <h3>Time Saved</h3>
+                        <p class="stat-value">450 hrs</p>
+                        <span class="stat-change">Manual work automated</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange"><i class="fas fa-thumbs-up"></i></div>
+                    <div class="stat-info">
+                        <h3>Customer Satisfaction</h3>
+                        <p class="stat-value">4.7/5</p>
+                        <span class="stat-change positive">+0.5 improvement</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card large">
+                    <div class="card-header">
+                        <h3>Supply Chain Performance Trends</h3>
+                    </div>
+                    <div class="chart-container" style="height: 350px;">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Cost Breakdown</h3>
+                    </div>
+                    <div class="chart-container" style="height: 300px;">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Key Performance Indicators (KPIs)</h3>
+                </div>
+                <div class="kpi-grid">
+                    <div class="kpi-item">
+                        <h4>Inventory Turnover Ratio</h4>
+                        <p class="kpi-value">6.8x</p>
+                        <div class="progress-bar"><div class="progress-fill green" style="width: 85%"></div></div>
+                        <span class="kpi-status positive">Excellent</span>
+                    </div>
+                    <div class="kpi-item">
+                        <h4>Order Fulfillment Rate</h4>
+                        <p class="kpi-value">96.2%</p>
+                        <div class="progress-bar"><div class="progress-fill green" style="width: 96%"></div></div>
+                        <span class="kpi-status positive">Above Target</span>
+                    </div>
+                    <div class="kpi-item">
+                        <h4>Supply Chain Cycle Time</h4>
+                        <p class="kpi-value">12.5 days</p>
+                        <div class="progress-bar"><div class="progress-fill orange" style="width: 70%"></div></div>
+                        <span class="kpi-status">Needs Improvement</span>
+                    </div>
+                    <div class="kpi-item">
+                        <h4>Perfect Order Rate</h4>
+                        <p class="kpi-value">91.8%</p>
+                        <div class="progress-bar"><div class="progress-fill green" style="width: 92%"></div></div>
+                        <span class="kpi-status positive">Good</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="auth.js"></script>
+    <script>requireAuth(); initializeUserDisplay();</script>
+    <script src="dashboard.js"></script>
+    <script>
+        // Performance Trends Chart
+        const perfCtx = document.getElementById('performanceChart');
+        if (perfCtx) {
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            new Chart(perfCtx, {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [
+                        {
+                            label: 'Cost Savings (₹ Lakhs)',
+                            data: [15, 22, 28, 35, 42, 48, 55, 62, 68, 75, 82, 90],
+                            borderColor: '#43a047',
+                            backgroundColor: 'rgba(67, 160, 71, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Efficiency (%)',
+                            data: [65, 68, 72, 75, 78, 82, 85, 87, 89, 91, 93, 95],
+                            borderColor: '#1e88e5',
+                            backgroundColor: 'rgba(30, 136, 229, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            yAxisID: 'y1'
+                        },
+                        {
+                            label: 'On-Time Delivery (%)',
+                            data: [70, 73, 76, 79, 82, 84, 85, 86, 87, 88, 89, 90],
+                            borderColor: '#ff6f00',
+                            backgroundColor: 'rgba(255, 111, 0, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Cost Savings (₹ Lakhs)'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'Percentage (%)'
+                            },
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                        }
+                    }
+                }
+            });
+        }
+
+        // Cost Breakdown Pie Chart
+        const costCtx = document.getElementById('costChart');
+        if (costCtx) {
+            new Chart(costCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Inventory Holding', 'Transportation', 'Storage', 'Labor', 'Other'],
+                    datasets: [{
+                        data: [35, 28, 18, 12, 7],
+                        backgroundColor: [
+                            '#1e88e5',
+                            '#43a047',
+                            '#ff6f00',
+                            '#9c27b0',
+                            '#e91e63'
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.parsed + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

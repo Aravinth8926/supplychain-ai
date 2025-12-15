@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transportation Tracking - SupplyChainAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo"><i class="fas fa-network-wired"></i><span>SupplyChain<strong>AI</strong></span></div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><i class="fas fa-home"></i><span>Dashboard</span></a>
+                <a href="demand-forecasting.html" class="nav-item"><i class="fas fa-chart-line"></i><span>Demand Forecasting</span></a>
+                <a href="inventory-management.html" class="nav-item"><i class="fas fa-boxes"></i><span>Inventory Management</span></a>
+                <a href="supplier-scoring.html" class="nav-item"><i class="fas fa-star"></i><span>Supplier Scoring</span></a>
+                <a href="disruption-alerts.html" class="nav-item"><i class="fas fa-bell"></i><span>Disruption Alerts</span></a>
+                <a href="transportation.html" class="nav-item active"><i class="fas fa-truck"></i><span>Transportation</span></a>
+                <a href="analytics.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Analytics</span></a>
+                <a href="reports.html" class="nav-item"><i class="fas fa-file-alt"></i><span>Reports</span></a>
+                <a href="settings.html" class="nav-item"><i class="fas fa-cog"></i><span>Settings</span></a>
+            </nav>
+            <div class="sidebar-footer"><a href="#" class="nav-item" onclick="event.preventDefault(); auth.logout();"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1><i class="fas fa-truck"></i> Transportation & Logistics</h1>
+                    <p>Real-time tracking and predictive delay management</p>
+                </div>
+                <button class="btn btn-primary"><i class="fas fa-plus"></i> New Shipment</button>
+            </header>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue"><i class="fas fa-shipping-fast"></i></div>
+                    <div class="stat-info">
+                        <h3>Active Shipments</h3>
+                        <p class="stat-value">156</p>
+                        <span class="stat-change">In transit across India</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-info">
+                        <h3>On-Time Delivery</h3>
+                        <p class="stat-value">87.3%</p>
+                        <span class="stat-change positive">+5% this month</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange"><i class="fas fa-clock"></i></div>
+                    <div class="stat-info">
+                        <h3>Avg Transit Time</h3>
+                        <p class="stat-value">5.2 days</p>
+                        <span class="stat-change positive">Improved by 1.3 days</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon red"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div class="stat-info">
+                        <h3>Delayed Shipments</h3>
+                        <p class="stat-value">12</p>
+                        <span class="stat-change">Requires attention</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-map-marked-alt"></i> Live Shipment Tracking Map</h3>
+                    <div class="filter-group">
+                        <select class="form-control" id="regionFilter">
+                            <option value="all">All Routes</option>
+                            <option value="north">North India</option>
+                            <option value="south">South India</option>
+                            <option value="east">East India</option>
+                            <option value="west">West India</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="shipmentMap" style="height: 500px; border-radius: 10px; overflow: hidden;"></div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Active Shipments</h3>
+                    <button class="btn btn-secondary"><i class="fas fa-download"></i> Export</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Shipment ID</th>
+                                <th>Route</th>
+                                <th>Status</th>
+                                <th>ETA</th>
+                                <th>Delay Risk</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>SHP-2024-001</strong></td>
+                                <td>Mumbai → Delhi</td>
+                                <td><span class="status-badge green">In Transit</span></td>
+                                <td>Dec 15, 2025 10:00 AM</td>
+                                <td><span class="risk-badge low">Low (5%)</span></td>
+                                <td><button class="btn-small">Track</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>SHP-2024-002</strong></td>
+                                <td>Pune → Bangalore</td>
+                                <td><span class="status-badge orange">Delayed</span></td>
+                                <td>Dec 16, 2025 2:00 PM</td>
+                                <td><span class="risk-badge high">High (85%)</span></td>
+                                <td><button class="btn-small">Track</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>SHP-2024-003</strong></td>
+                                <td>Chennai → Kolkata</td>
+                                <td><span class="status-badge green">In Transit</span></td>
+                                <td>Dec 17, 2025 8:00 AM</td>
+                                <td><span class="risk-badge medium">Medium (35%)</span></td>
+                                <td><button class="btn-small">Track</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-brain"></i> AI Route Optimization Suggestions</h3>
+                </div>
+                <div class="insights-list">
+                    <div class="insight-item">
+                        <i class="fas fa-route"></i>
+                        <div>
+                            <h4>Alternative Route Recommended - Mumbai to Delhi</h4>
+                            <p>Current route via NH48 experiencing heavy traffic. Alternative via NH44 adds 45 minutes but avoids 3-hour delay. Estimated fuel savings: ₹2,500. Weather conditions favorable on alternate route.</p>
+                            <button class="btn btn-primary" style="margin-top: 0.5rem;">Apply Route Change</button>
+                        </div>
+                    </div>
+                    <div class="insight-item">
+                        <i class="fas fa-cloud-rain"></i>
+                        <div>
+                            <h4>Weather Alert - Pune Region</h4>
+                            <p>Heavy rainfall predicted for next 24 hours. Recommend delaying 3 scheduled shipments by 12 hours to avoid weather-related delays and ensure driver safety.</p>
+                            <button class="btn btn-secondary" style="margin-top: 0.5rem;">Reschedule Shipments</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="auth.js"></script>
+    <script>requireAuth(); initializeUserDisplay();</script>
+    <script src="dashboard.js"></script>
+    <script>
+        // Initialize the map centered on India
+        const map = L.map('shipmentMap').setView([20.5937, 78.9629], 5);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 18
+        }).addTo(map);
+
+        // Define shipment routes with realistic Indian locations
+        const shipments = [
+            {
+                id: 'SHP-2024-001',
+                route: 'Mumbai → Delhi',
+                status: 'In Transit',
+                start: [19.0760, 72.8777], // Mumbai
+                end: [28.7041, 77.1025],   // Delhi
+                current: [23.0225, 72.5714], // Ahmedabad (midpoint)
+                color: '#43a047',
+                progress: 45
+            },
+            {
+                id: 'SHP-2024-002',
+                route: 'Pune → Bangalore',
+                status: 'Delayed',
+                start: [18.5204, 73.8567],  // Pune
+                end: [12.9716, 77.5946],    // Bangalore
+                current: [15.3173, 75.7139], // Belgaum (midpoint)
+                color: '#ff6f00',
+                progress: 60
+            },
+            {
+                id: 'SHP-2024-003',
+                route: 'Chennai → Kolkata',
+                status: 'In Transit',
+                start: [13.0827, 80.2707],  // Chennai
+                end: [22.5726, 88.3639],    // Kolkata
+                current: [17.6868, 83.2185], // Visakhapatnam (midpoint)
+                color: '#43a047',
+                progress: 55
+            },
+            {
+                id: 'SHP-2024-004',
+                route: 'Hyderabad → Mumbai',
+                status: 'In Transit',
+                start: [17.3850, 78.4867],  // Hyderabad
+                end: [19.0760, 72.8777],    // Mumbai
+                current: [18.5204, 73.8567], // Pune (near end)
+                color: '#43a047',
+                progress: 85
+            },
+            {
+                id: 'SHP-2024-005',
+                route: 'Jaipur → Lucknow',
+                status: 'In Transit',
+                start: [26.9124, 75.7873],  // Jaipur
+                end: [26.8467, 80.9462],    // Lucknow
+                current: [27.1767, 78.0081], // Agra (midpoint)
+                color: '#43a047',
+                progress: 50
+            }
+        ];
+
+        // Custom truck icon
+        const truckIcon = L.divIcon({
+            className: 'truck-marker',
+            html: '<div style="background: #1e88e5; color: white; padding: 8px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"><i class="fas fa-truck" style="font-size: 16px;"></i></div>',
+            iconSize: [40, 40],
+            iconAnchor: [20, 20]
+        });
+
+        const warehouseIcon = L.divIcon({
+            className: 'warehouse-marker',
+            html: '<div style="background: #43a047; color: white; padding: 6px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"><i class="fas fa-warehouse" style="font-size: 14px;"></i></div>',
+            iconSize: [32, 32],
+            iconAnchor: [16, 16]
+        });
+
+        // Add shipments to map
+        shipments.forEach(shipment => {
+            // Draw route line
+            const routeLine = L.polyline([shipment.start, shipment.end], {
+                color: '#e74c3c',
+                weight: 3,
+                opacity: 0.7,
+                dashArray: '5, 10'
+            }).addTo(map);
+
+            // Add start marker (warehouse)
+            L.marker(shipment.start, { icon: warehouseIcon })
+                .addTo(map)
+                .bindPopup(`<b>Origin</b><br>${shipment.route.split(' → ')[0]}`);
+
+            // Add end marker (warehouse)
+            L.marker(shipment.end, { icon: warehouseIcon })
+                .addTo(map)
+                .bindPopup(`<b>Destination</b><br>${shipment.route.split(' → ')[1]}`);
+
+            // Add current position marker (truck)
+            const truckMarker = L.marker(shipment.current, { icon: truckIcon })
+                .addTo(map)
+                .bindPopup(`
+                    <div style="min-width: 200px;">
+                        <h4 style="margin: 0 0 8px 0; color: #1e88e5;">${shipment.id}</h4>
+                        <p style="margin: 4px 0;"><strong>Route:</strong> ${shipment.route}</p>
+                        <p style="margin: 4px 0;"><strong>Status:</strong> <span style="color: ${shipment.color};">${shipment.status}</span></p>
+                        <p style="margin: 4px 0;"><strong>Progress:</strong> ${shipment.progress}%</p>
+                        <div style="background: #e0e0e0; height: 8px; border-radius: 4px; margin-top: 8px; overflow: hidden;">
+                            <div style="background: ${shipment.color}; height: 100%; width: ${shipment.progress}%;"></div>
+                        </div>
+                    </div>
+                `);
+
+            // Animate truck movement (simulate real-time tracking)
+            let step = 0;
+            setInterval(() => {
+                step += 0.001;
+                if (step > 1) step = 0;
+                
+                const lat = shipment.start[0] + (shipment.end[0] - shipment.start[0]) * step;
+                const lng = shipment.start[1] + (shipment.end[1] - shipment.start[1]) * step;
+                
+                truckMarker.setLatLng([lat, lng]);
+            }, 5000); // Update every 5 seconds
+        });
+
+        // Add legend
+        const legend = L.control({ position: 'bottomright' });
+        legend.onAdd = function(map) {
+            const div = L.DomUtil.create('div', 'map-legend');
+            div.innerHTML = `
+                <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                    <h4 style="margin: 0 0 10px 0; font-size: 14px;">Legend</h4>
+                    <div style="margin: 5px 0; display: flex; align-items: center; gap: 8px;">
+                        <div style="background: #1e88e5; color: white; padding: 4px 8px; border-radius: 4px;">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <span style="font-size: 12px;">Active Shipment</span>
+                    </div>
+                    <div style="margin: 5px 0; display: flex; align-items: center; gap: 8px;">
+                        <div style="background: #43a047; color: white; padding: 4px 8px; border-radius: 4px;">
+                            <i class="fas fa-warehouse"></i>
+                        </div>
+                        <span style="font-size: 12px;">Warehouse</span>
+                    </div>
+                    <div style="margin: 5px 0; display: flex; align-items: center; gap: 8px;">
+                        <div style="width: 30px; height: 2px; background: #e74c3c; border-top: 2px dashed #e74c3c;"></div>
+                        <span style="font-size: 12px;">Route</span>
+                    </div>
+                </div>
+            `;
+            return div;
+        };
+        legend.addTo(map);
+
+        // Add zoom controls info
+        const info = L.control({ position: 'topleft' });
+        info.onAdd = function(map) {
+            const div = L.DomUtil.create('div', 'map-info');
+            div.innerHTML = `
+                <div style="background: white; padding: 12px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); max-width: 250px;">
+                    <h4 style="margin: 0 0 8px 0; font-size: 14px; color: #1e88e5;">
+                        <i class="fas fa-info-circle"></i> Live Tracking
+                    </h4>
+                    <p style="margin: 0; font-size: 12px; color: #666;">
+                        Click on markers for shipment details. Trucks update position every 5 seconds.
+                    </p>
+                </div>
+            `;
+            return div;
+        };
+        info.addTo(map);
+
+        console.log('Shipment tracking map initialized with', shipments.length, 'active shipments');
+
+        // Store all markers and lines for filtering
+        const mapElements = [];
+
+        // Categorize shipments by region
+        function getShipmentRegion(shipment) {
+            const route = shipment.route.toLowerCase();
+            
+            // North India cities
+            if (route.includes('delhi') || route.includes('jaipur') || route.includes('lucknow')) {
+                return 'north';
+            }
+            // South India cities
+            if (route.includes('bangalore') || route.includes('chennai') || route.includes('hyderabad')) {
+                return 'south';
+            }
+            // East India cities
+            if (route.includes('kolkata') || route.includes('visakhapatnam')) {
+                return 'east';
+            }
+            // West India cities
+            if (route.includes('mumbai') || route.includes('pune') || route.includes('ahmedabad')) {
+                return 'west';
+            }
+            return 'all';
+        }
+
+        // Store markers with their regions
+        shipments.forEach((shipment, index) => {
+            const region = getShipmentRegion(shipment);
+            mapElements.push({
+                region: region,
+                markers: [], // Will be populated
+                line: null
+            });
+        });
+
+        // Region filter functionality
+        document.getElementById('regionFilter').addEventListener('change', function(e) {
+            const selectedRegion = e.target.value;
+            
+            // Get all markers and polylines
+            map.eachLayer(function(layer) {
+                if (layer instanceof L.Marker || layer instanceof L.Polyline) {
+                    // Show/hide based on region
+                    if (selectedRegion === 'all') {
+                        map.addLayer(layer);
+                    } else {
+                        // Check if this layer belongs to selected region
+                        const layerRegion = layer.options.region;
+                        if (layerRegion === selectedRegion) {
+                            map.addLayer(layer);
+                        } else if (layerRegion) {
+                            map.removeLayer(layer);
+                        }
+                    }
+                }
+            });
+
+            // Update map view based on region
+            if (selectedRegion === 'north') {
+                map.setView([28.0, 77.0], 6);
+            } else if (selectedRegion === 'south') {
+                map.setView([13.0, 78.0], 6);
+            } else if (selectedRegion === 'east') {
+                map.setView([22.0, 87.0], 6);
+            } else if (selectedRegion === 'west') {
+                map.setView([19.0, 73.0], 6);
+            } else {
+                map.setView([20.5937, 78.9629], 5);
+            }
+
+            // Show notification
+            const regionName = selectedRegion === 'all' ? 'All Regions' : 
+                              selectedRegion.charAt(0).toUpperCase() + selectedRegion.slice(1) + ' India';
+            
+            // Create temporary notification
+            const notification = L.control({ position: 'topright' });
+            notification.onAdd = function(map) {
+                const div = L.DomUtil.create('div', 'filter-notification');
+                div.innerHTML = `
+                    <div style="background: #1e88e5; color: white; padding: 12px 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); animation: slideIn 0.3s ease;">
+                        <i class="fas fa-filter"></i> Showing: ${regionName}
+                    </div>
+                `;
+                return div;
+            };
+            notification.addTo(map);
+
+            // Remove notification after 2 seconds
+            setTimeout(() => {
+                map.removeControl(notification);
+            }, 2000);
+        });
+
+        // Add region property to markers and lines
+        map.eachLayer(function(layer) {
+            if (layer instanceof L.Marker || layer instanceof L.Polyline) {
+                // Determine region based on coordinates
+                if (layer instanceof L.Marker) {
+                    const latlng = layer.getLatLng();
+                    const lat = latlng.lat;
+                    const lng = latlng.lng;
+                    
+                    // Rough region boundaries
+                    if (lat > 24) {
+                        layer.options.region = 'north';
+                    } else if (lat < 17) {
+                        layer.options.region = 'south';
+                    } else if (lng > 82) {
+                        layer.options.region = 'east';
+                    } else if (lng < 77) {
+                        layer.options.region = 'west';
+                    }
+                } else if (layer instanceof L.Polyline) {
+                    // For polylines, use the start point
+                    const latlngs = layer.getLatLngs();
+                    if (latlngs.length > 0) {
+                        const lat = latlngs[0].lat;
+                        const lng = latlngs[0].lng;
+                        
+                        if (lat > 24) {
+                            layer.options.region = 'north';
+                        } else if (lat < 17) {
+                            layer.options.region = 'south';
+                        } else if (lng > 82) {
+                            layer.options.region = 'east';
+                        } else if (lng < 77) {
+                            layer.options.region = 'west';
+                        }
+                    }
+                }
+            }
+        });
+
+        // Add CSS animation for notification
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

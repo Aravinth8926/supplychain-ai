@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - SupplyChainAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo"><i class="fas fa-network-wired"></i><span>SupplyChain<strong>AI</strong></span></div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><i class="fas fa-home"></i><span>Dashboard</span></a>
+                <a href="demand-forecasting.html" class="nav-item"><i class="fas fa-chart-line"></i><span>Demand Forecasting</span></a>
+                <a href="inventory-management.html" class="nav-item"><i class="fas fa-boxes"></i><span>Inventory Management</span></a>
+                <a href="supplier-scoring.html" class="nav-item"><i class="fas fa-star"></i><span>Supplier Scoring</span></a>
+                <a href="disruption-alerts.html" class="nav-item"><i class="fas fa-bell"></i><span>Disruption Alerts</span></a>
+                <a href="transportation.html" class="nav-item"><i class="fas fa-truck"></i><span>Transportation</span></a>
+                <a href="analytics.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Analytics</span></a>
+                <a href="reports.html" class="nav-item"><i class="fas fa-file-alt"></i><span>Reports</span></a>
+                <a href="settings.html" class="nav-item active"><i class="fas fa-cog"></i><span>Settings</span></a>
+            </nav>
+            <div class="sidebar-footer"><a href="index.html" class="nav-item"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1><i class="fas fa-cog"></i> Settings & Configuration</h1>
+                    <p>Customize your SupplyChainAI experience</p>
+                </div>
+            </header>
+            
+            <div class="settings-tabs">
+                <button class="settings-tab active" data-tab="profile">
+                    <i class="fas fa-user"></i> Profile
+                </button>
+                <button class="settings-tab" data-tab="company">
+                    <i class="fas fa-building"></i> Company
+                </button>
+                <button class="settings-tab" data-tab="notifications">
+                    <i class="fas fa-bell"></i> Notifications
+                </button>
+                <button class="settings-tab" data-tab="integrations">
+                    <i class="fas fa-plug"></i> Integrations
+                </button>
+                <button class="settings-tab" data-tab="security">
+                    <i class="fas fa-shield-alt"></i> Security
+                </button>
+            </div>
+            
+            <div class="settings-content">
+                <!-- Profile Settings -->
+                <div class="settings-panel active" id="profile-panel">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Profile Information</h3>
+                        </div>
+                        <form class="settings-form" id="profileForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" id="profileFirstName" placeholder="Enter first name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" id="profileLastName" placeholder="Enter last name">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input type="email" class="form-control" id="profileEmail" placeholder="your.email@company.com" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="tel" class="form-control" id="profilePhone" placeholder="+91 XXXXX XXXXX">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Profile Picture</label>
+                                <div class="file-upload">
+                                    <button type="button" class="btn btn-secondary"><i class="fas fa-upload"></i> Upload Photo</button>
+                                    <span class="file-info">JPG, PNG or GIF (Max 2MB)</span>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Company Settings -->
+                <div class="settings-panel" id="company-panel">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Company Information</h3>
+                        </div>
+                        <form class="settings-form" id="companyForm">
+                            <div class="form-group">
+                                <label>Company Name</label>
+                                <input type="text" class="form-control" id="companyName" placeholder="Company name">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Industry</label>
+                                    <select class="form-control" id="companyIndustry">
+                                        <option value="electronics">Electronics</option>
+                                        <option value="automotive">Automotive</option>
+                                        <option value="textiles">Textiles</option>
+                                        <option value="pharmaceuticals">Pharmaceuticals</option>
+                                        <option value="fmcg">FMCG</option>
+                                        <option value="chemicals">Chemicals</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company Size</label>
+                                    <select class="form-control">
+                                        <option>1-50 employees</option>
+                                        <option>51-200 employees</option>
+                                        <option>201-500 employees</option>
+                                        <option>500+ employees</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <textarea class="form-control" rows="3" placeholder="Company address">[address]</textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Notification Settings -->
+                <div class="settings-panel" id="notifications-panel">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Notification Preferences</h3>
+                            <p class="text-muted">Choose how you want to be notified</p>
+                        </div>
+                        <div class="notification-settings">
+                            <div class="notification-item">
+                                <div class="notification-info">
+                                    <h4>Critical Alerts</h4>
+                                    <p>Immediate notifications for critical supply chain disruptions</p>
+                                </div>
+                                <div class="notification-toggles">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Email</span>
+                                    </label>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">SMS</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="notification-item">
+                                <div class="notification-info">
+                                    <h4>Inventory Alerts</h4>
+                                    <p>Low stock warnings and replenishment suggestions</p>
+                                </div>
+                                <div class="notification-toggles">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Email</span>
+                                    </label>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">SMS</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="notification-item">
+                                <div class="notification-info">
+                                    <h4>Weekly Reports</h4>
+                                    <p>Summary of supply chain performance and insights</p>
+                                </div>
+                                <div class="notification-toggles">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Email</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Integration Settings -->
+                <div class="settings-panel" id="integrations-panel">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>System Integrations</h3>
+                            <p class="text-muted">Connect with your existing tools</p>
+                        </div>
+                        <div class="integrations-list">
+                            <div class="integration-item">
+                                <div class="integration-icon"><i class="fas fa-database"></i></div>
+                                <div class="integration-info">
+                                    <h4>ERP System</h4>
+                                    <p>SAP, Oracle, or custom ERP integration</p>
+                                    <span class="badge-success">Connected</span>
+                                </div>
+                                <button class="btn btn-secondary">Configure</button>
+                            </div>
+                            <div class="integration-item">
+                                <div class="integration-icon"><i class="fas fa-envelope"></i></div>
+                                <div class="integration-info">
+                                    <h4>Email Service</h4>
+                                    <p>Gmail, Outlook, or SMTP</p>
+                                    <span class="badge-success">Connected</span>
+                                </div>
+                                <button class="btn btn-secondary">Configure</button>
+                            </div>
+                            <div class="integration-item">
+                                <div class="integration-icon"><i class="fas fa-map-marked-alt"></i></div>
+                                <div class="integration-info">
+                                    <h4>GPS Tracking</h4>
+                                    <p>Real-time vehicle and shipment tracking</p>
+                                    <span class="badge-warning">Not Connected</span>
+                                </div>
+                                <button class="btn btn-primary">Connect</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Security Settings -->
+                <div class="settings-panel" id="security-panel">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Security Settings</h3>
+                        </div>
+                        <div class="security-settings">
+                            <div class="security-item">
+                                <h4>Change Password</h4>
+                                <form class="settings-form">
+                                    <div class="form-group">
+                                        <label>Current Password</label>
+                                        <input type="password" class="form-control" placeholder="Enter current password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>New Password</label>
+                                        <input type="password" class="form-control" placeholder="Enter new password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Confirm New Password</label>
+                                        <input type="password" class="form-control" placeholder="Confirm new password">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Update Password</button>
+                                </form>
+                            </div>
+                            
+                            <div class="security-item">
+                                <h4>Two-Factor Authentication</h4>
+                                <p>Add an extra layer of security to your account</p>
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-label">Enable 2FA</span>
+                                </label>
+                            </div>
+                            
+                            <div class="security-item">
+                                <h4>Active Sessions</h4>
+                                <p>Manage devices where you're currently logged in</p>
+                                <div class="sessions-list">
+                                    <div class="session-item">
+                                        <i class="fas fa-desktop"></i>
+                                        <div>
+                                            <strong>Windows PC - Chrome</strong>
+                                            <p>Mumbai, India • Active now</p>
+                                        </div>
+                                        <span class="badge-success">Current</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="auth.js"></script>
+    <script>
+        // Check authentication
+        requireAuth();
+        // Initialize user display
+        initializeUserDisplay();
+    </script>
+    <script src="dashboard.js"></script>
+    <script src="settings.js"></script>
+</body>
+</html>

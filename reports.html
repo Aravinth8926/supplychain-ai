@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - SupplyChainAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo"><i class="fas fa-network-wired"></i><span>SupplyChain<strong>AI</strong></span></div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><i class="fas fa-home"></i><span>Dashboard</span></a>
+                <a href="demand-forecasting.html" class="nav-item"><i class="fas fa-chart-line"></i><span>Demand Forecasting</span></a>
+                <a href="inventory-management.html" class="nav-item"><i class="fas fa-boxes"></i><span>Inventory Management</span></a>
+                <a href="supplier-scoring.html" class="nav-item"><i class="fas fa-star"></i><span>Supplier Scoring</span></a>
+                <a href="disruption-alerts.html" class="nav-item"><i class="fas fa-bell"></i><span>Disruption Alerts</span></a>
+                <a href="transportation.html" class="nav-item"><i class="fas fa-truck"></i><span>Transportation</span></a>
+                <a href="analytics.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Analytics</span></a>
+                <a href="reports.html" class="nav-item active"><i class="fas fa-file-alt"></i><span>Reports</span></a>
+                <a href="settings.html" class="nav-item"><i class="fas fa-cog"></i><span>Settings</span></a>
+            </nav>
+            <div class="sidebar-footer"><a href="#" class="nav-item" onclick="event.preventDefault(); auth.logout();"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1><i class="fas fa-file-alt"></i> Reports & Documentation</h1>
+                    <p>Generate comprehensive reports for analysis and compliance</p>
+                </div>
+                <button class="btn btn-primary"><i class="fas fa-plus"></i> Create Custom Report</button>
+            </header>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Quick Report Templates</h3>
+                    <p class="text-muted">Generate instant reports with pre-configured templates</p>
+                </div>
+                <div class="report-templates">
+                    <div class="report-template-card">
+                        <div class="template-icon blue">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Monthly Performance Report</h4>
+                        <p>Comprehensive overview of supply chain KPIs and metrics</p>
+                        <div class="template-actions">
+                            <button class="btn btn-primary">Generate Report</button>
+                            <button class="btn btn-secondary">Schedule</button>
+                        </div>
+                    </div>
+                    
+                    <div class="report-template-card">
+                        <div class="template-icon green">
+                            <i class="fas fa-boxes"></i>
+                        </div>
+                        <h4>Inventory Status Report</h4>
+                        <p>Current stock levels, turnover rates, and reorder recommendations</p>
+                        <div class="template-actions">
+                            <button class="btn btn-primary">Generate Report</button>
+                            <button class="btn btn-secondary">Schedule</button>
+                        </div>
+                    </div>
+                    
+                    <div class="report-template-card">
+                        <div class="template-icon purple">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4>Supplier Performance Report</h4>
+                        <p>Detailed analysis of supplier reliability and quality metrics</p>
+                        <div class="template-actions">
+                            <button class="btn btn-primary">Generate Report</button>
+                            <button class="btn btn-secondary">Schedule</button>
+                        </div>
+                    </div>
+                    
+                    <div class="report-template-card">
+                        <div class="template-icon orange">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h4>Cost Analysis Report</h4>
+                        <p>Breakdown of inventory, transportation, and operational costs</p>
+                        <div class="template-actions">
+                            <button class="btn btn-primary">Generate Report</button>
+                            <button class="btn btn-secondary">Schedule</button>
+                        </div>
+                    </div>
+                    
+                    <div class="report-template-card">
+                        <div class="template-icon red">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h4>Disruption Analysis Report</h4>
+                        <p>Summary of alerts, disruptions, and resolution times</p>
+                        <div class="template-actions">
+                            <button class="btn btn-primary">Generate Report</button>
+                            <button class="btn btn-secondary">Schedule</button>
+                        </div>
+                    </div>
+                    
+                    <div class="report-template-card">
+                        <div class="template-icon teal">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h4>Transportation Report</h4>
+                        <p>Delivery performance, route efficiency, and delay analysis</p>
+                        <div class="template-actions">
+                            <button class="btn btn-primary">Generate Report</button>
+                            <button class="btn btn-secondary">Schedule</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Recent Reports</h3>
+                    <div class="filter-group">
+                        <select class="form-control"><option>All Reports</option><option>This Month</option><option>Last 3 Months</option></select>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Report Name</th>
+                                <th>Type</th>
+                                <th>Generated On</th>
+                                <th>Period</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>November Performance Summary</strong></td>
+                                <td>Monthly Performance</td>
+                                <td>Dec 1, 2025</td>
+                                <td>Nov 2025</td>
+                                <td><span class="badge-success">Completed</span></td>
+                                <td>
+                                    <button class="btn-small"><i class="fas fa-download"></i> Download</button>
+                                    <button class="btn-small"><i class="fas fa-eye"></i> View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Q3 Supplier Analysis</strong></td>
+                                <td>Supplier Performance</td>
+                                <td>Oct 15, 2025</td>
+                                <td>Jul-Sep 2025</td>
+                                <td><span class="badge-success">Completed</span></td>
+                                <td>
+                                    <button class="btn-small"><i class="fas fa-download"></i> Download</button>
+                                    <button class="btn-small"><i class="fas fa-eye"></i> View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Weekly Inventory Status</strong></td>
+                                <td>Inventory Status</td>
+                                <td>Dec 10, 2025</td>
+                                <td>Dec 3-10, 2025</td>
+                                <td><span class="badge-success">Completed</span></td>
+                                <td>
+                                    <button class="btn-small"><i class="fas fa-download"></i> Download</button>
+                                    <button class="btn-small"><i class="fas fa-eye"></i> View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Scheduled Reports</h3>
+                    <p class="text-muted">Automated reports sent to your email</p>
+                </div>
+                <div class="scheduled-reports-list">
+                    <div class="scheduled-report-item">
+                        <div class="schedule-info">
+                            <h4><i class="fas fa-calendar-alt"></i> Monthly Performance Report</h4>
+                            <p>Frequency: First day of every month at 9:00 AM</p>
+                            <p>Recipients: [email], [email]</p>
+                        </div>
+                        <div class="schedule-actions">
+                            <button class="btn-small">Edit</button>
+                            <button class="btn-small btn-danger">Delete</button>
+                        </div>
+                    </div>
+                    <div class="scheduled-report-item">
+                        <div class="schedule-info">
+                            <h4><i class="fas fa-calendar-week"></i> Weekly Inventory Alert</h4>
+                            <p>Frequency: Every Monday at 8:00 AM</p>
+                            <p>Recipients: [email]</p>
+                        </div>
+                        <div class="schedule-actions">
+                            <button class="btn-small">Edit</button>
+                            <button class="btn-small btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="auth.js"></script>
+    <script>requireAuth(); initializeUserDisplay();</script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
